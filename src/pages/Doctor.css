@@ -1,0 +1,423 @@
+/* =========================================
+   WEALTHPATH BUDDY
+========================================= */
+
+.buddy-page {
+  min-height: 100vh;
+  padding: 42px 48px;
+  background: #f8fafc;
+  color: #111827;
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.buddy-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.buddy-eyebrow {
+  margin: 0 0 8px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: #94a3b8;
+}
+
+.buddy-topbar h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.buddy-subtitle {
+  margin: 9px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.ai-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #64748b;
+}
+
+.ai-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.buddy-card {
+  min-height: 650px;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+/* =========================================
+   WELCOME
+========================================= */
+
+.buddy-welcome {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 55px 35px 30px;
+}
+
+.buddy-orb {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: #111827;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  margin-bottom: 25px;
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.15);
+}
+
+.welcome-eyebrow {
+  margin: 0 0 12px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #94a3b8;
+}
+
+.buddy-welcome h2 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -1.2px;
+}
+
+.welcome-description {
+  max-width: 500px;
+  margin: 15px auto 32px;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   SUGGESTIONS
+========================================= */
+
+.suggestion-grid {
+  width: 100%;
+  max-width: 850px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.suggestion-card {
+  min-height: 145px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.suggestion-card:hover {
+  transform: translateY(-3px);
+  border-color: #cbd5e1;
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.07);
+}
+
+.suggestion-icon {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.suggestion-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 7px;
+}
+
+.suggestion-text {
+  display: block;
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   CHAT CONVERSATION
+========================================= */
+
+.conversation {
+  flex: 1;
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+}
+
+.conversation-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 35px;
+}
+
+.message-row {
+  display: flex;
+  gap: 11px;
+  margin-bottom: 22px;
+}
+
+.message-user {
+  justify-content: flex-end;
+}
+
+.message-buddy {
+  justify-content: flex-start;
+}
+
+.buddy-avatar {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: #111827;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.message-bubble {
+  max-width: 68%;
+  padding: 13px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.user-bubble {
+  background: #111827;
+  color: #ffffff;
+  border-bottom-right-radius: 5px;
+}
+
+.buddy-bubble {
+  background: #f1f5f9;
+  color: #334155;
+  border-bottom-left-radius: 5px;
+}
+
+.message-name {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.conversation-label {
+  text-align: center;
+  padding: 12px;
+  font-size: 10px;
+  color: #cbd5e1;
+  letter-spacing: 1px;
+}
+
+
+/* =========================================
+   TYPING
+========================================= */
+
+.typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 3px 0;
+}
+
+.typing span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #94a3b8;
+  animation: buddyTyping 1.2s infinite;
+}
+
+.typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes buddyTyping {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.buddy-input {
+  margin: 0 25px 25px;
+  padding: 7px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+}
+
+.buddy-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 13px 15px;
+  font-size: 14px;
+  color: #111827;
+}
+
+.buddy-input input::placeholder {
+  color: #94a3b8;
+}
+
+.buddy-input button {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 11px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.buddy-input button:hover:not(:disabled) {
+  transform: translateX(2px);
+}
+
+.buddy-input button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.buddy-footer {
+  max-width: 1100px;
+  margin: 14px auto 0;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+.buddy-footer span {
+  margin-right: 5px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+  .suggestion-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .buddy-page {
+    padding: 25px 18px;
+  }
+
+  .buddy-topbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .buddy-topbar h1 {
+    font-size: 27px;
+  }
+
+  .buddy-welcome h2 {
+    font-size: 27px;
+  }
+
+  .suggestion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .buddy-card {
+    min-height: 600px;
+  }
+
+  .message-bubble {
+    max-width: 82%;
+  }
+}

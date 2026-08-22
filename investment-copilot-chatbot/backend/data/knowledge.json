@@ -1,0 +1,79 @@
+[
+  {
+    "id": "diversification",
+    "title": "Diversification",
+    "tags": ["diversification", "risk", "spread", "eggs", "basket", "concentration"],
+    "content": "Diversification means spreading your money across different investments (asset classes, sectors, regions, and individual securities) so that a decline in any single one does not sink your whole portfolio. It does not eliminate risk, but it reduces the impact of any single bad outcome. A common rule of thumb is to avoid having any single stock make up a very large share of your total portfolio.",
+    "source": "Investor.gov - Diversification basics"
+  },
+  {
+    "id": "compounding",
+    "title": "Compound Interest / Compounding Returns",
+    "tags": ["compound", "compounding", "interest", "growth", "time", "long-term"],
+    "content": "Compounding is when the returns you earn start generating their own returns. Because of compounding, money invested earlier tends to grow much more than the same amount invested later, even at the same rate of return. This is why starting early and staying invested for the long term is one of the most reliable ways to build wealth.",
+    "source": "SEC Investor.gov - The Power of Compound Interest"
+  },
+  {
+    "id": "index-funds",
+    "title": "Index Funds",
+    "tags": ["index fund", "etf", "passive", "expense ratio", "s&p 500"],
+    "content": "An index fund is a fund that aims to track the performance of a market index (like the S&P 500) rather than trying to beat it. Because they are not actively picking stocks, index funds typically have lower fees (expense ratios) than actively managed funds. Over long periods, many actively managed funds fail to beat their benchmark index after fees.",
+    "source": "SPIVA Scorecard / SEC Investor Bulletin on Index Funds"
+  },
+  {
+    "id": "risk-return",
+    "title": "Risk and Return",
+    "tags": ["risk", "return", "volatility", "reward", "tradeoff"],
+    "content": "Generally, investments with higher potential returns come with higher risk (the chance of losing money or seeing large price swings). Stocks are typically more volatile than bonds, which are typically more volatile than cash. Understanding your own risk tolerance and time horizon helps determine an appropriate mix of asset classes.",
+    "source": "FINRA - Risk and Return basics"
+  },
+  {
+    "id": "emergency-fund",
+    "title": "Emergency Fund",
+    "tags": ["emergency fund", "cash reserve", "safety net", "liquidity"],
+    "content": "An emergency fund is cash set aside, usually in a savings account, to cover unexpected expenses or income loss. Many financial educators suggest keeping 3-6 months of essential living expenses in an easily accessible account before investing heavily in the market, since this reduces the chance you'll be forced to sell investments at a bad time.",
+    "source": "Consumer Financial Protection Bureau - Emergency savings"
+  },
+  {
+    "id": "dollar-cost-averaging",
+    "title": "Dollar-Cost Averaging",
+    "tags": ["dollar-cost averaging", "dca", "regular investing", "sip"],
+    "content": "Dollar-cost averaging means investing a fixed amount of money at regular intervals (e.g. monthly) regardless of the price, rather than investing a lump sum all at once. This spreads out purchase prices over time and can reduce the emotional temptation to try to time the market.",
+    "source": "FINRA Investor Education - Dollar-Cost Averaging"
+  },
+  {
+    "id": "expense-ratios",
+    "title": "Fees and Expense Ratios",
+    "tags": ["fees", "expense ratio", "cost", "load"],
+    "content": "The expense ratio is the annual fee a fund charges, expressed as a percentage of assets invested. Even small differences in fees compound over decades and can meaningfully reduce long-term returns. Comparing expense ratios is one of the simplest ways to evaluate similar fund options.",
+    "source": "SEC Investor Bulletin - How Fees and Expenses Affect Your Investment Portfolio"
+  },
+  {
+    "id": "asset-allocation",
+    "title": "Asset Allocation",
+    "tags": ["asset allocation", "stocks", "bonds", "cash", "mix", "portfolio"],
+    "content": "Asset allocation is how you divide your portfolio among broad categories like stocks, bonds, and cash. It is one of the biggest drivers of a portfolio's long-term risk and return. A common approach is to adjust the stock/bond mix based on time horizon and risk tolerance, becoming more conservative as a goal gets closer.",
+    "source": "FINRA - Asset Allocation basics"
+  },
+  {
+    "id": "retirement-accounts",
+    "title": "Tax-Advantaged Retirement Accounts",
+    "tags": ["retirement", "401k", "ira", "tax-advantaged", "pension"],
+    "content": "Many countries offer tax-advantaged accounts for retirement savings (such as 401(k)s and IRAs in the US, or NPS/PPF in India). These accounts can offer tax benefits on contributions, growth, or withdrawals, which can meaningfully boost long-term outcomes compared to investing the same amount in a fully taxable account.",
+    "source": "IRS / Investor.gov - Retirement Accounts overview"
+  },
+  {
+    "id": "market-timing",
+    "title": "Market Timing",
+    "tags": ["market timing", "timing the market", "prediction", "short-term trading"],
+    "content": "Market timing is trying to predict short-term market movements to buy low and sell high. Research consistently shows this is extremely difficult to do consistently, even for professionals, and missing just a handful of the market's best days can significantly hurt long-term returns. Most long-term investors are better served by a consistent, diversified strategy than by trying to time the market.",
+    "source": "Vanguard / Fidelity investor research on market timing"
+  },
+  {
+    "id": "concentration-risk",
+    "title": "Concentration Risk",
+    "tags": ["concentration", "single stock", "overweight", "sector risk"],
+    "content": "Concentration risk happens when too much of a portfolio is tied up in one investment, sector, or asset class. If that single holding performs poorly, it can have an outsized negative effect on the whole portfolio. Reviewing your largest positions and sector weights periodically helps catch unintended concentration.",
+    "source": "FINRA - Concentration Risk"
+  }
+]

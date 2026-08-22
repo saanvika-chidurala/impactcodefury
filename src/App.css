@@ -1,184 +1,1571 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* =========================================================
+   WEALTHPATH — DESIGN SYSTEM
+   Single source of truth for color/spacing/radius tokens.
+   Every component below references these instead of raw hex,
+   so the palette can be changed in one place.
+========================================================= */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+:root {
+  /* Pastel palette */
+  --wp-cream: #F8F5FC;
+  --wp-sage: #D8ECE6;
+  --wp-sage-dark: #9BD4C4;
+  --wp-brown: #9B87C4;
+  --wp-brown-light: #7C7291;
+  --wp-terracotta: #F2A9BE;
+  --wp-white: #FFFFFF;
+  --wp-muted: #9B93AE;
+  --wp-border: #E9E1F2;
+
+  /* Status colors */
+  --wp-success-bg: #E1F4E8;
+  --wp-success-text: #4F8F68;
+  --wp-success-border: #C7E8D3;
+  --wp-warning-bg: #FDECEE;
+  --wp-warning-text: #C9758A;
+  --wp-warning-border: #F6D3DA;
+
+  /* Radius */
+  --wp-radius-sm: 8px;
+  --wp-radius-md: 14px;
+  --wp-radius-lg: 20px;
+
+  /* Shadow */
+  --wp-shadow: 0 10px 30px rgba(155, 135, 196, 0.10);
+  --wp-shadow-strong: 0 10px 35px rgba(155, 135, 196, 0.16);
+
+  /* Layout */
+  --wp-sidebar-width: 250px;
+  --wp-sidebar-width-mobile: 200px;
 }
 
-.hero {
+
+/* =========================================================
+   RESET & BASE
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--wp-cream);
+  color: var(--wp-brown);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  color: var(--wp-brown);
+  margin-top: 0;
+}
+
+a {
+  color: var(--wp-brown);
+}
+
+a:hover {
+  color: var(--wp-terracotta);
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--wp-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C8C3BA;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #AFA99F;
+}
+
+
+/* =========================================================
+   SHARED UTILITIES
+========================================================= */
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  color: var(--wp-terracotta);
+  margin-bottom: 8px;
+}
+
+.muted {
+  color: var(--wp-muted);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #6B9B70;
+  border-radius: 50%;
+  margin-right: 7px;
+  flex-shrink: 0;
+}
+
+.positive {
+  color: #4ade80;
+  font-weight: 700;
+}
+
+.warning-text {
+  color: var(--wp-terracotta);
+}
+
+
+/* =========================================================
+   GENERIC FORM CONTROLS
+   (applies to every input/select/textarea across the app —
+   individual pages only add layout, not color, on top of this)
+========================================================= */
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px 14px;
+  background: var(--wp-white);
+  color: var(--wp-brown);
+  border: 1px solid var(--wp-border);
+  border-radius: var(--wp-radius-sm);
+  font-size: 14px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #A6A097;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--wp-sage-dark);
+  box-shadow: 0 0 0 3px rgba(148, 199, 182, 0.18);
+}
+
+label {
+  display: block;
+  margin: 16px 0 7px;
+  color: var(--wp-brown);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   GENERIC CARD + BUTTONS
+========================================================= */
+
+.card,
+.planner, .result,
+.result-card,
+.goal-form, .goal-result,
+.hype-input-card, .hype-metrics > div,
+.attribution-card {
+  background: var(--wp-white);
+  border: 1px solid var(--wp-border);
+  border-radius: var(--wp-radius-lg);
+  box-shadow: var(--wp-shadow);
+}
+
+.planner, .result { padding: 30px; margin-bottom: 25px; }
+.goal-form, .goal-result { padding: 30px; }
+.hype-input-card { padding: 28px; }
+
+button {
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Primary action buttons (one rule, many selectors that use it) */
+.calculate-button,
+.doctor-button,
+.input-footer button,
+.submit-btn,
+.classification-continue,
+.auth-button {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--wp-brown);
+  color: var(--wp-white);
+  border: none;
+  border-radius: var(--wp-radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.calculate-button:hover,
+.doctor-button:hover,
+.input-footer button:hover,
+.submit-btn:hover,
+.classification-continue:hover,
+.auth-button:hover {
+  background: #302C27;
+  transform: translateY(-1px);
+}
+
+.auth-button:disabled,
+.classification-continue:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-button.loading {
   position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+  pointer-events: none;
+  opacity: 0.75;
 }
 
-#center {
+.auth-button.loading::after {
+  content: "";
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  margin-left: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  vertical-align: -2px;
+  animation: auth-spin 0.7s linear infinite;
+}
+
+@keyframes auth-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Secondary / pill / text buttons */
+.small-button {
+  width: auto;
+  border: 1px solid var(--wp-border);
+  background: var(--wp-white);
+  color: var(--wp-brown);
+  padding: 8px 14px;
+  border-radius: var(--wp-radius-sm);
+}
+
+.text-button {
+  width: auto;
+  background: none;
+  color: var(--wp-brown);
+  padding: 0;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.suggestions button {
+  background: var(--wp-sage);
+  color: var(--wp-brown);
+  border: none;
+  border-radius: var(--wp-radius-sm);
+}
+
+.suggestions button:hover {
+  background: var(--wp-sage-dark);
+}
+
+.logout-button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: transparent;
+  color: var(--wp-brown-light);
+  border: 1px solid var(--wp-border);
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.logout-button:hover {
+  background: var(--wp-warning-bg);
+  color: var(--wp-warning-text);
+  border-color: var(--wp-warning-border);
+}
+
+
+/* =========================================================
+   STATUS BANNERS (success / warning — reused everywhere:
+   goal planner, drift messages, auth feedback)
+========================================================= */
+
+.success,
+.goal-success,
+.auth-message.success,
+.drift-success,
+.drift-good {
+  background: var(--wp-success-bg);
+  color: var(--wp-success-text);
+  border: 1px solid var(--wp-success-border);
+  border-radius: var(--wp-radius-md);
+}
+
+.warning,
+.goal-warning,
+.auth-message.error,
+.drift-bad {
+  background: var(--wp-warning-bg);
+  color: var(--wp-warning-text);
+  border: 1px solid var(--wp-warning-border);
+  border-radius: var(--wp-radius-md);
+}
+
+.success, .warning { padding: 15px; }
+
+.goal-success strong { color: var(--wp-success-text); }
+.goal-warning strong { color: var(--wp-warning-text); }
+.goal-success p, .goal-warning p { margin-bottom: 0; font-size: 13px; color: var(--wp-brown-light); }
+
+.auth-message { display: none; margin-top: 15px; padding: 12px 14px; font-size: 12px; line-height: 1.5; }
+.auth-message.error, .auth-message.success { display: block; }
+
+.drift-good, .drift-bad {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 9px;
+  border-radius: 20px;
+}
+
+/* Soft neutral info sections */
+.simulation-note, .doctor-sources, .hype-conclusion {
+  background: var(--wp-sage);
+  color: var(--wp-brown);
+  border-radius: var(--wp-radius-lg);
+}
+
+
+/* =========================================================
+   APP LAYOUT (sidebar + main content)
+========================================================= */
+
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  background: var(--wp-cream);
+}
+
+.sidebar {
+  width: var(--wp-sidebar-width);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
 
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+  background: var(--wp-white);
+  border-right: 1px solid var(--wp-border);
+  padding: 28px 18px;
+  overflow-y: auto;
+  z-index: 100;
 }
 
-#next-steps {
+.main-content {
+  margin-left: var(--wp-sidebar-width);
+  width: calc(100% - var(--wp-sidebar-width));
+  min-height: 100vh;
+  background: var(--wp-cream);
+}
+
+.brand {
   display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+  align-items: center;
+  gap: 10px;
+  padding: 5px 12px 35px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--wp-brown);
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  background: var(--wp-sage);
+  color: var(--wp-brown);
+  border-radius: var(--wp-radius-sm);
   display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  align-items: center;
+  justify-content: center;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
-  position: relative;
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+.nav-label {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  color: var(--wp-muted);
+  font-weight: 700;
+  padding: 0 12px;
+  margin-top: 20px;
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+.nav-link {
+  display: block;
+  width: 100%;
+  padding: 11px 13px;
+  margin: 4px 0;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--wp-brown-light);
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-link:hover {
+  background: var(--wp-sage);
+  color: var(--wp-brown);
+}
+
+.nav-link.active {
+  background: var(--wp-brown);
+  color: var(--wp-white);
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.connection {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--wp-cream);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.connection strong, .connection small,
+.user-card strong, .user-card small {
+  display: block;
+}
+
+.connection strong { font-size: 11px; }
+.connection small { font-size: 10px; color: var(--wp-muted); margin-top: 3px; }
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.user-card strong { font-size: 13px; }
+.user-card small { font-size: 11px; color: var(--wp-muted); margin-top: 3px; }
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: var(--wp-sage);
+  color: var(--wp-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.authenticated-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.authenticated-user-info strong { display: block; color: var(--wp-brown); font-size: 12px; }
+.authenticated-user-info small { display: block; margin-top: 3px; color: var(--wp-muted); font-size: 10px; }
+
+@media (max-width: 800px) {
+  .sidebar { width: var(--wp-sidebar-width-mobile); }
+  .main-content {
+    margin-left: var(--wp-sidebar-width-mobile);
+    width: calc(100% - var(--wp-sidebar-width-mobile));
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+}
+
+
+/* =========================================================
+   AUTHENTICATION PAGE
+========================================================= */
+
+.auth-page {
+  min-height: 100vh;
+  background: var(--wp-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 460px;
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.auth-brand .brand-mark {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.auth-brand h1 { margin: 0; font-size: 28px; }
+.auth-brand p { margin: 7px 0 0; color: var(--wp-brown-light); font-size: 13px; }
+
+.auth-card {
+  max-width: 520px;
+  padding: 32px;
+}
+
+.auth-card h1, .auth-card h2 {
+  margin: 0 0 8px;
+  font-size: 23px;
+}
+
+.auth-subtitle, .auth-card .muted {
+  margin: 0 0 25px;
+  color: var(--wp-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.auth-form { display: flex; flex-direction: column; }
+
+.auth-link-row {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--wp-muted);
+  font-size: 12px;
+}
+
+.auth-link {
+  color: var(--wp-brown);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-link:hover { color: var(--wp-terracotta); }
+
+.form-help { margin-top: 6px; color: var(--wp-muted); font-size: 10px; }
+
+.forgot-password {
+  display: block;
+  margin-top: 8px;
+  text-align: right;
+  color: var(--wp-brown-light);
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.forgot-password:hover { color: var(--wp-terracotta); }
+
+/* Compact classification tiles embedded inside the signup form */
+.classification-section { margin-top: 24px; }
+
+.classification-title {
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.classification-description {
+  margin: 0 0 14px;
+  color: var(--wp-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.classification-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.classification-option { position: relative; }
+
+.classification-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.classification-option label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 75px;
+  padding: 12px 8px;
+  background: var(--wp-white);
+  border: 1px solid var(--wp-border);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.classification-option label:hover {
+  background: var(--wp-sage);
+  border-color: var(--wp-sage-dark);
+  transform: translateY(-1px);
+}
+
+.classification-option input:checked + label {
+  background: var(--wp-brown);
+  color: #ffffff;
+  border-color: var(--wp-brown);
+  box-shadow: 0 5px 15px rgba(64, 59, 51, 0.15);
+}
+
+.category-info {
+  margin-top: 15px;
+  padding: 14px;
+  background: var(--wp-sage);
+  border-radius: 12px;
+}
+
+.category-info strong { display: block; font-size: 12px; margin-bottom: 5px; }
+.category-info p { margin: 0; font-size: 11px; line-height: 1.5; }
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: var(--wp-sage);
+  color: var(--wp-brown);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.category-badge.student { background: var(--wp-success-bg); color: var(--wp-success-text); }
+.category-badge.amateur { background: var(--wp-warning-bg); color: var(--wp-warning-text); }
+.category-badge.professional { background: var(--wp-cream); color: var(--wp-brown); }
+
+@media (max-width: 600px) {
+  .auth-page { padding: 20px 15px; }
+  .auth-card { padding: 24px 20px; }
+  .classification-options { grid-template-columns: 1fr; }
+  .classification-option label { min-height: 55px; }
+  .auth-brand h1 { font-size: 24px; }
+}
+
+
+/* =========================================================
+   FULL-PAGE INVESTOR CLASSIFICATION
+   (separate page: user picks Student / Amateur / Professional
+   as a full-width card grid, distinct from the compact tiles above)
+========================================================= */
+
+.classification-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: var(--wp-cream);
+}
+
+.classification-card {
+  width: 100%;
+  max-width: 850px;
+  padding: 45px;
+}
+
+.classification-card h1 { font-size: 36px; margin: 8px 0 12px; }
+
+.classification-subtitle {
+  color: var(--wp-brown-light);
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.category-card {
+  width: 100%;
+  margin: 0;
+  padding: 22px;
+  text-align: left;
+  background: var(--wp-white);
+  color: var(--wp-brown);
+  border: 2px solid var(--wp-border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.category-card:hover {
+  border-color: var(--wp-sage-dark);
+  transform: translateY(-2px);
+}
+
+.category-card.selected {
+  border-color: var(--wp-brown);
+  background: var(--wp-sage);
+}
+
+.category-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-card h2 { margin: 0; font-size: 20px; }
+.category-card p { color: var(--wp-brown-light); font-size: 13px; line-height: 1.5; }
+.category-card li { color: var(--wp-brown-light); font-size: 12px; margin: 7px 0; }
+
+.selected-badge { font-size: 10px; font-weight: bold; }
+
+@media (max-width: 700px) {
+  .category-list { grid-template-columns: 1fr; }
+  .classification-card { padding: 25px; }
+  .classification-card h1 { font-size: 28px; }
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard {
+  max-width: 1250px;
+  margin: auto;
+  padding: 45px 40px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.dashboard-header h1 { margin: 5px 0 8px; font-size: 32px; }
+.dashboard-header p:last-child { color: var(--wp-muted); margin: 0; }
+
+.sync-status {
+  font-size: 12px;
+  color: var(--wp-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.account-pill {
+  background: var(--wp-white);
+  border: 1px solid var(--wp-border);
+  padding: 10px 16px;
+  border-radius: 30px;
+  font-size: 14px;
+}
+
+/* Hero wealth summary card */
+.wealth-card {
+  background: var(--wp-brown);
+  color: var(--wp-white);
+  border-radius: var(--wp-radius-lg);
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.wealth-card p { font-size: 11px; letter-spacing: 1px; color: var(--wp-cream); }
+.wealth-card h2 { font-size: 42px; margin: 10px 0; color: var(--wp-white); }
+.wealth-caption { color: var(--wp-cream); font-size: 12px; margin-left: 12px; }
+
+.wealth-mini-chart {
+  height: 100px;
+  width: 220px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.chart-bar { width: 18px; background: var(--wp-sage-dark); border-radius: 5px 5px 0 0; }
+.b1 { height: 30%; } .b2 { height: 40%; } .b3 { height: 35%; } .b4 { height: 55%; }
+.b5 { height: 48%; } .b6 { height: 70%; } .b7 { height: 65%; } .b8 { height: 90%; }
+
+/* Top-level KPI metrics row */
+.metrics {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.metric-card {
+  background: var(--wp-white);
+  padding: 24px;
+  border-radius: var(--wp-radius-lg);
+  border: 1px solid var(--wp-border);
+}
+
+.metric-card p { color: var(--wp-muted); margin-top: 0; }
+.metric-card h2 { font-size: 28px; margin: 12px 0; }
+.metric-card small { font-size: 15px; color: var(--wp-muted); }
+.small-unit { font-size: 14px; color: var(--wp-muted); }
+
+.metric-card.primary { background: var(--wp-brown); color: var(--wp-white); }
+.metric-card.primary p { color: var(--wp-cream); }
+.metric-card.primary h2 { color: var(--wp-white); }
+
+.health-bar {
+  height: 6px;
+  background: var(--wp-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.health-bar div { height: 100%; background: #6B9B70; }
+
+/* Asset grid (4-up cards) */
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.asset-card {
+  background: var(--wp-white);
+  border: 1px solid var(--wp-border);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.asset-card span, .asset-card small { display: block; }
+.asset-card span { color: var(--wp-muted); font-size: 12px; }
+.asset-card strong { display: block; font-size: 22px; margin: 10px 0 5px; }
+.asset-card small { color: var(--wp-muted); font-size: 11px; }
+
+.asset-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--wp-border);
+}
+
+.asset-row div { display: flex; flex-direction: column; gap: 4px; }
+.asset-row span { font-size: 12px; color: var(--wp-muted); }
+
+/* Two-column panel grid (allocation / goals / etc.) */
+.dashboard-grid, .grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.dashboard-card, .panel {
+  background: var(--wp-white);
+  border: 1px solid var(--wp-border);
+  border-radius: 18px;
+  padding: 25px;
+}
+
+.card-heading, .panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-heading h2, .panel-header h2 { margin: 0; }
+.card-heading a { color: var(--wp-muted); font-size: 12px; }
+
+/* Portfolio health score + allocation bar (dashboard summary variant) */
+.health-score { font-size: 28px; font-weight: 700; }
+.health-score small { font-size: 12px; color: var(--wp-muted); }
+
+.allocation-row { margin-top: 18px; }
+.allocation-row span { font-size: 12px; color: var(--wp-muted); }
+.allocation-row strong { float: right; font-size: 12px; }
+
+.allocation-bar {
+  height: 7px;
+  background: var(--wp-border);
+  border-radius: 10px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.allocation-bar div { height: 100%; background: var(--wp-brown); border-radius: 10px; }
+
+/* Allocation donut + legend (used on Dashboard summary panel) */
+.allocation { display: flex; align-items: center; gap: 45px; }
+
+.fake-donut {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--wp-brown) 0% 65%,
+    var(--wp-brown-light) 65% 85%,
+    var(--wp-terracotta) 85% 95%,
+    var(--wp-border) 95% 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fake-donut > div {
+  width: 125px;
+  height: 125px;
+  background: var(--wp-white);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fake-donut strong { font-size: 20px; }
+.fake-donut span { font-size: 12px; color: var(--wp-muted); }
+
+.allocation-list { flex: 1; }
+.allocation-list div { display: flex; align-items: center; gap: 10px; margin: 16px 0; }
+.allocation-list strong { margin-left: auto; }
+
+.dot { width: 9px; height: 9px; border-radius: 50%; }
+.equity { background: var(--wp-brown); }
+.debt { background: var(--wp-brown-light); }
+.gold { background: var(--wp-terracotta); }
+.cash { background: var(--wp-border); }
+
+/* Goals list (compact, dashboard-embedded variant) */
+.goal-row { display: flex; align-items: center; gap: 12px; margin-top: 15px; }
+
+.goal-icon {
+  width: 35px;
+  height: 35px;
+  background: var(--wp-sage);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goal-info { flex: 1; }
+.goal-info strong, .goal-info span { display: block; }
+.goal-info strong { font-size: 13px; }
+.goal-info span { font-size: 11px; color: var(--wp-muted); margin-top: 3px; }
+.goal-percent { font-size: 13px; }
+
+.goal-progress {
+  height: 6px;
+  background: var(--wp-border);
+  border-radius: 10px;
+  margin: 10px 0 20px 47px;
+  overflow: hidden;
+}
+
+.goal-progress div { height: 100%; background: var(--wp-brown); }
+
+/* Insight / doctor callouts */
+.insight-card, .doctor-insight, .insight {
+  margin-top: 18px;
+  border-radius: 18px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: var(--wp-warning-bg);
+  border: 1px solid var(--wp-warning-border);
+}
+
+.insight-icon, .doctor-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 28px;
+  background: var(--wp-warning-border);
+}
+
+.doctor-icon { background: var(--wp-border); }
+
+.insight-card h3, .doctor-insight h3, .insight h2 { margin: 5px 0 10px; font-size: 15px; }
+.insight-card p:last-child, .doctor-insight p:last-child, .insight p {
+  color: var(--wp-brown-light);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.insight-card button {
+  margin-left: auto;
+  border: none;
+  background: var(--wp-brown);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 9px;
+  white-space: nowrap;
+}
+
+@media (max-width: 950px) {
+  .metrics { grid-template-columns: 1fr 1fr; }
+  .asset-grid { grid-template-columns: 1fr 1fr; }
+  .dashboard-grid, .grid-two { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 650px) {
+  .dashboard { padding: 25px 20px; }
+  .dashboard-header { flex-direction: column; gap: 15px; }
+  .wealth-card { flex-direction: column; align-items: flex-start; gap: 25px; }
+  .wealth-mini-chart { width: 100%; }
+  .asset-grid { grid-template-columns: 1fr; }
+  .metrics { grid-template-columns: 1fr; }
+  .allocation { flex-direction: column; }
+  .goals { grid-template-columns: 1fr; }
+}
+
+
+/* =========================================================
+   PORTFOLIO X-RAY PAGE
+========================================================= */
+
+.portfolio-page { max-width: 1250px; margin: auto; padding: 45px 40px; }
+
+.portfolio-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+.portfolio-header h1 { font-size: 32px; margin: 5px 0 8px; }
+.portfolio-header p:last-child { color: var(--wp-muted); }
+
+.last-updated { color: var(--wp-muted); font-size: 11px; text-align: right; }
+.last-updated strong { display: block; color: var(--wp-brown-light); margin-top: 5px; }
+
+.portfolio-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.portfolio-metric {
+  background: var(--wp-white);
+  border: 1px solid var(--wp-border);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.portfolio-metric span, .portfolio-metric small { display: block; }
+.portfolio-metric > span { color: var(--wp-muted); font-size: 11px; }
+.portfolio-metric strong { display: block; font-size: 24px; margin: 9px 0 5px; }
+.portfolio-metric strong span { display: inline; font-size: 12px; color: var(--wp-muted); }
+.portfolio-metric small { font-size: 11px; color: var(--wp-muted); }
+
+.xray-card {
+  background: var(--wp-white);
+  border: 1px solid var(--wp-border);
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.section-heading { display: flex; justify-content: space-between; align-items: center; }
+.section-heading h2 { margin: 5px 0 20px; font-size: 19px; }
+.section-heading > span { font-size: 11px; color: var(--wp-muted); }
+
+/* Allocation donut variant used specifically on this page */
+.allocation-visual { display: flex; align-items: center; gap: 70px; }
+
+.allocation-donut {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--wp-brown) 0deg 245deg,
+    var(--wp-brown-light) 245deg 331deg,
+    var(--wp-border) 331deg 360deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-inner {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  background: var(--wp-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.donut-inner strong { font-size: 28px; }
+.donut-inner span { color: var(--wp-muted); font-size: 11px; }
+
+.allocation-list { width: 350px; }
+.allocation-item { display: flex; align-items: center; gap: 12px; margin: 18px 0; }
+.allocation-item > div { flex: 1; }
+.allocation-item strong, .allocation-item small { display: block; }
+.allocation-item strong { font-size: 13px; }
+.allocation-item small { color: var(--wp-muted); font-size: 11px; margin-top: 3px; }
+.allocation-item b { font-size: 13px; }
+.allocation-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* Overlap-detection callout */
+.overlap-card {
+  background: var(--wp-warning-bg);
+  border: 1px solid var(--wp-warning-border);
+  border-radius: 18px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.overlap-top { display: flex; justify-content: space-between; align-items: center; }
+.overlap-top h2 { font-size: 21px; max-width: 650px; margin: 7px 0; }
+.overlap-top p { color: var(--wp-brown-light); font-size: 12px; }
+
+.overlap-score {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--wp-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--wp-warning-border);
+}
+
+.overlap-score strong { font-size: 25px; }
+.overlap-score span { color: var(--wp-muted); font-size: 10px; }
+
+.fund-comparison { margin-top: 25px; }
+
+.fund-row {
+  display: grid;
+  grid-template-columns: 220px 1fr 45px;
+  gap: 20px;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.fund-name strong, .fund-name span { display: block; }
+.fund-name strong { font-size: 12px; }
+.fund-name span { font-size: 10px; color: var(--wp-muted); margin-top: 3px; }
+
+.overlap-bar {
+  height: 8px;
+  background: var(--wp-warning-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.overlap-bar div { height: 100%; background: var(--wp-brown); border-radius: 10px; }
+.fund-row > strong { font-size: 12px; }
+
+.overlap-explanation {
+  border-top: 1px solid var(--wp-warning-border);
+  margin-top: 25px;
+  padding-top: 18px;
+}
+
+.overlap-explanation strong { font-size: 12px; }
+.overlap-explanation p { color: var(--wp-brown-light); font-size: 12px; line-height: 1.5; }
+
+.source-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.source-item {
+  border: 1px solid var(--wp-border);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.source-icon {
+  width: 35px;
+  height: 35px;
+  background: var(--wp-cream);
+  border-radius: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+.source-item > div:nth-child(2) { flex: 1; }
+.source-item strong, .source-item span { display: block; }
+.source-item strong { font-size: 12px; }
+.source-item span { color: var(--wp-muted); font-size: 10px; margin-top: 3px; }
+.source-item b { font-size: 13px; }
+
+.portfolio-insight {
+  background: var(--wp-brown);
+  color: var(--wp-white);
+  border-radius: 18px;
+  padding: 25px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.portfolio-insight .eyebrow { color: var(--wp-cream); }
+.portfolio-insight h3 { margin: 5px 0; font-size: 17px; color: var(--wp-white); }
+.portfolio-insight p:last-child { color: var(--wp-cream); font-size: 12px; line-height: 1.6; max-width: 800px; }
+
+.insight-symbol {
+  width: 40px;
+  height: 40px;
+  background: var(--wp-brown-light);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 950px) {
+  .portfolio-metrics { grid-template-columns: 1fr 1fr; }
+  .allocation-visual { gap: 30px; }
+}
+
+@media (max-width: 650px) {
+  .portfolio-page { padding: 25px 20px; }
+  .portfolio-header { flex-direction: column; gap: 15px; }
+  .portfolio-metrics { grid-template-columns: 1fr; }
+  .allocation-visual { flex-direction: column; align-items: flex-start; }
+  .source-grid { grid-template-columns: 1fr; }
+  .fund-row { grid-template-columns: 1fr; gap: 8px; }
+  .overlap-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+
+
+/* =========================================================
+   GOALS PAGE
+========================================================= */
+
+.goal-page { max-width: 1200px; margin: auto; padding: 50px 40px; }
+.goal-header { margin-bottom: 35px; }
+.goal-header h1 { font-size: 38px; margin: 5px 0 10px; }
+.goal-header p:last-child { color: var(--wp-muted); max-width: 600px; line-height: 1.6; }
+
+.goal-layout { display: grid; grid-template-columns: 420px 1fr; gap: 25px; }
+
+.goal-form h2 { margin-bottom: 25px; }
+
+.calculate-button { margin-top: 25px; }
+
+.goal-result { color: var(--wp-brown); padding: 35px; min-height: 500px; }
+.goal-result p { color: var(--wp-brown-light); }
+.goal-result strong, .goal-result h2, .goal-result h3 { color: var(--wp-brown); }
+
+.empty-result {
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--wp-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.empty-result p { color: var(--wp-muted); max-width: 400px; }
+
+.probability-card {
+  margin-top: 25px;
+  padding: 25px;
+  background: var(--wp-cream);
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.probability-card p { color: var(--wp-brown-light); margin: 0 0 8px; }
+.probability-card strong { font-size: 42px; }
+
+.probability-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 7px solid var(--wp-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.goal-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+.goal-metrics div { padding: 20px; background: var(--wp-cream); border-radius: 12px; }
+.goal-metrics span { display: block; font-size: 12px; color: var(--wp-brown-light); margin-bottom: 8px; }
+.goal-metrics strong { font-size: 20px; }
+
+.simulation-note { margin-top: 20px; padding: 18px; }
+.simulation-note p { font-size: 13px; line-height: 1.6; }
+
+/* SIP recommendation banner */
+.sip-recommendation {
+  margin-top: 20px;
+  padding: 22px;
+  border-radius: 15px;
+  background: var(--wp-brown);
+  color: var(--wp-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.sip-recommendation h3 { margin: 5px 0 8px; font-size: 16px; color: var(--wp-white); }
+.sip-recommendation > div:first-child > strong { font-size: 30px; }
+
+.sip-gap { text-align: right; }
+.sip-gap span, .sip-gap small { display: block; color: var(--wp-cream); }
+.sip-gap strong { display: block; font-size: 20px; margin: 5px 0; color: var(--wp-white); }
+.sip-gap small { font-size: 11px; }
+
+/* Goal drift card */
+.goal-drift {
+  margin-top: 20px;
+  padding: 22px;
+  border: 1px solid var(--wp-border);
+  border-radius: 15px;
+  background: var(--wp-white);
+}
+
+.drift-header { display: flex; justify-content: space-between; align-items: center; }
+.drift-header h3 { margin: 5px 0 0; }
+
+.goal-timeline { position: relative; height: 80px; margin: 25px 5px 10px; }
+
+.timeline-line {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 25px;
+  height: 5px;
+  background: var(--wp-border);
+  border-radius: 10px;
+}
+
+.timeline-progress { width: 65%; height: 100%; background: var(--wp-brown); border-radius: 10px; }
+
+.timeline-point { position: absolute; top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.timeline-point strong { font-size: 12px; }
+.timeline-point span { font-size: 11px; color: var(--wp-brown-light); }
+.timeline-point.start { left: 0; }
+.timeline-point.target { right: 0; text-align: right; }
+
+.drift-message { padding: 15px; border-radius: 10px; background: var(--wp-warning-bg); }
+.drift-message strong { font-size: 13px; color: var(--wp-warning-text); }
+.drift-message p { font-size: 12px; color: var(--wp-brown-light); margin-bottom: 0; }
+.drift-message.drift-success { background: var(--wp-success-bg); }
+.drift-message.drift-success strong { color: var(--wp-success-text); }
+
+.drift-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+
+.action-card { display: flex; gap: 10px; padding: 14px; background: var(--wp-cream); border-radius: 10px; }
+
+.action-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--wp-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.action-card strong { font-size: 12px; }
+.action-card p { font-size: 11px; color: var(--wp-brown-light); margin: 4px 0 0; }
+
+@media (max-width: 900px) {
+  .goal-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .drift-actions { grid-template-columns: 1fr; }
+}
+
+
+/* =========================================================
+   HYPE CHECK PAGE
+========================================================= */
+
+.hype-page { max-width: 1100px; margin: 0 auto; padding: 45px 40px; }
+.hype-header { margin-bottom: 30px; }
+.hype-header h1 { max-width: 700px; font-size: 36px; line-height: 1.15; margin: 0 0 12px; }
+.hype-header p:last-child { max-width: 650px; color: var(--wp-muted); font-size: 14px; line-height: 1.6; }
+
+.hype-input-card h2 { margin: 0 0 6px; font-size: 19px; }
+.hype-input-card > p { margin: 0; color: var(--wp-muted); font-size: 12px; }
+
+.hype-input-card textarea {
+  min-height: 150px;
+  margin-top: 22px;
+  padding: 16px;
+  resize: vertical;
+  background: var(--wp-cream);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.hype-input-card textarea:focus { background: var(--wp-white); }
+
+.input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.input-footer span { color: var(--wp-muted); font-size: 10px; }
+.input-footer button { width: auto; padding: 12px 20px; font-size: 12px; }
+
+.hype-empty { text-align: center; padding: 75px 20px; }
+
+.hype-empty-icon {
+  width: 55px;
+  height: 55px;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: var(--wp-cream);
+  color: var(--wp-brown-light);
+  font-size: 25px;
+}
+
+.hype-empty h2 { font-size: 18px; }
+.hype-empty p { color: var(--wp-muted); font-size: 12px; }
+
+.hype-result { margin-top: 20px; }
+
+.stock-header {
+  background: var(--wp-brown);
+  color: var(--wp-white);
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--wp-shadow-strong);
+}
+
+.stock-header h2 { margin: 5px 0; font-size: 26px; color: var(--wp-white); }
+.stock-header > div:first-child > span { color: var(--wp-cream); font-size: 11px; }
+
+.stock-return { text-align: right; }
+.stock-return small { display: block; color: var(--wp-cream); font-size: 9px; letter-spacing: 1px; }
+.stock-return strong { display: block; margin-top: 5px; font-size: 32px; }
+
+.hype-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
+.hype-metrics > div { padding: 22px; box-shadow: 0 5px 20px rgba(64, 59, 51, 0.03); }
+.hype-metrics span { display: block; color: var(--wp-brown-light); font-size: 11px; }
+.hype-metrics strong { display: block; margin: 9px 0 5px; font-size: 25px; }
+.hype-metrics small { color: var(--wp-muted); font-size: 10px; }
+
+.valuation-warning {
+  display: flex;
+  gap: 13px;
+  margin-top: 15px;
+  padding: 20px;
+  border: 1px solid var(--wp-warning-border);
+  border-radius: 16px;
+  background: var(--wp-warning-bg);
+}
+
+.warning-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--wp-warning-border);
+}
+
+.valuation-warning strong { color: var(--wp-warning-text); font-size: 12px; }
+.valuation-warning p { margin-bottom: 0; color: var(--wp-brown-light); font-size: 11px; }
+
+.historical-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding: 26px;
+  background: var(--wp-white);
+  border: 1px solid var(--wp-border);
+  border-radius: 18px;
+}
+
+.historical-card h3 { margin: 5px 0 8px; font-size: 17px; }
+.historical-card p:last-child { max-width: 650px; color: var(--wp-brown-light); font-size: 12px; line-height: 1.6; }
+
+.historical-number { min-width: 180px; text-align: center; }
+.historical-number strong { display: block; font-size: 30px; }
+.historical-number span { color: var(--wp-muted); font-size: 10px; }
+
+.hype-conclusion { display: flex; gap: 15px; margin-top: 15px; padding: 25px; }
+
+.conclusion-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: var(--wp-white);
+  color: var(--wp-brown);
+}
+
+.hype-conclusion h3 { margin: 5px 0 8px; font-size: 16px; }
+.hype-conclusion p:last-child { margin: 0; font-size: 12px; line-height: 1.6; }
+
+@media (max-width: 700px) {
+  .hype-page { padding: 25px 20px; }
+  .hype-metrics { grid-template-columns: 1fr; }
+  .stock-header, .historical-card { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .stock-return { text-align: left; }
+  .input-footer { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
