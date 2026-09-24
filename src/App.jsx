@@ -4,7 +4,6 @@ import Login from "./pages/login";
 import Classification from "./pages/classification";
 import Dashboard from "./pages/Dashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HypeCheck from "./pages/HypeCheck";
 
 
 
