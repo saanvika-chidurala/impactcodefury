@@ -1,373 +1,227 @@
-function Dashboard() {
+import { Link } from "react-router-dom";
+
+export default function Classification() {
+  const classificationModules = [
+    {
+      title: "Asset Class Categorization",
+      description:
+        "Classify holdings across Equities, Debt, Hybrid, Gold, and Real Estate to monitor asset allocation balance.",
+      icon: "🏷️",
+      path: "/classify/assets",
+      action: "Classify Assets",
+    },
+    {
+      title: "Risk & Volatility Profiling",
+      description:
+        "Segment investments by risk levels—High, Moderate, or Low Risk—based on market beta and volatility metrics.",
+      icon: "⚖️",
+      path: "/classify/risk",
+      action: "Profile Risk",
+    },
+    {
+      title: "Tax & Lock-in Buckets",
+      description:
+        "Categorize assets by tax implications (LTCG, STCG) and liquidity availability (ELSS lock-ins, FDs, Liquid funds).",
+      icon: "📂",
+      path: "/classify/tax",
+      action: "Manage Buckets",
+    },
+    {
+      title: "Sector & Market Cap Breakdown",
+      description:
+        "Tag holdings into Large, Mid, Small Cap, and specific sectors (Tech, Pharma, Banking) to spot concentration risks.",
+      icon: "📊",
+      path: "/classify/sectors",
+      action: "View Sector Breakdown",
+    },
+  ];
+
   return (
-    <div className="dashboard">
+    <div style={styles.body}>
+      <style>{customStyles}</style>
 
-      {/* HEADER */}
-
-      <div className="dashboard-header">
-
-        <div>
-          <p className="eyebrow">
-            FINANCIAL OVERVIEW
-          </p>
-
-          <h1>
-            Good evening, Mihad 👋
-          </h1>
-
-          <p>
-            Here's how your money is doing across everything you own.
-          </p>
+      <div className="header">
+        <div className="brand-logo">
+          <span>🌱</span> WealthPath
         </div>
-
-        <div className="sync-status">
-          <span className="status-dot"></span>
-          Data synced just now
-        </div>
-
+        <h1>Portfolio Classification Center</h1>
+        <p>
+          Organize, tag, and structure your investments to optimize asset allocation and risk management. Select a classification module below.
+        </p>
       </div>
 
-
-      {/* TOTAL WEALTH */}
-
-      <section className="wealth-card">
-
-        <div>
-
-          <p>
-            TOTAL PORTFOLIO
-          </p>
-
-          <h2>
-            ₹12,48,320
-          </h2>
-
-          <span className="positive">
-            ↑ 8.42%
-          </span>
-
-          <span className="wealth-caption">
-            ₹97,420 growth this year
-          </span>
-
-        </div>
-
-
-        <div className="wealth-mini-chart">
-
-          <div className="chart-bar b1"></div>
-          <div className="chart-bar b2"></div>
-          <div className="chart-bar b3"></div>
-          <div className="chart-bar b4"></div>
-          <div className="chart-bar b5"></div>
-          <div className="chart-bar b6"></div>
-          <div className="chart-bar b7"></div>
-          <div className="chart-bar b8"></div>
-
-        </div>
-
-      </section>
-
-
-      {/* ASSET CARDS */}
-
-      <div className="asset-grid">
-
-        <div className="asset-card">
-
-          <span>Mutual Funds</span>
-
-          <strong>
-            ₹5.20L
-          </strong>
-
-          <small>
-            41.7% of portfolio
-          </small>
-
-        </div>
-
-
-        <div className="asset-card">
-
-          <span>Stocks</span>
-
-          <strong>
-            ₹3.10L
-          </strong>
-
-          <small>
-            24.8% of portfolio
-          </small>
-
-        </div>
-
-
-        <div className="asset-card">
-
-          <span>NPS</span>
-
-          <strong>
-            ₹1.80L
-          </strong>
-
-          <small>
-            14.4% of portfolio
-          </small>
-
-        </div>
-
-
-        <div className="asset-card">
-
-          <span>EPF</span>
-
-          <strong>
-            ₹1.38L
-          </strong>
-
-          <small>
-            11.1% of portfolio
-          </small>
-
-        </div>
-
-      </div>
-
-
-      {/* MAIN GRID */}
-
-      <div className="dashboard-grid">
-
-
-        {/* PORTFOLIO HEALTH */}
-
-        <section className="dashboard-card">
-
-          <div className="card-heading">
-
+      <div className="options-grid">
+        {classificationModules.map((item) => (
+          <Link key={item.title} to={item.path} className="option-card">
             <div>
-
-              <p className="eyebrow">
-                PORTFOLIO X-RAY
-              </p>
-
-              <h2>
-                Portfolio Health
-              </h2>
-
+              <div className="icon-wrapper">{item.icon}</div>
+              <h2 className="card-title">{item.title}</h2>
+              <p className="card-desc">{item.description}</p>
             </div>
-
-            <span className="health-score">
-              7.4
-              <small>/10</small>
-            </span>
-
-          </div>
-
-
-          <div className="allocation">
-
-            <div className="allocation-row">
-
-              <span>Equity</span>
-
-              <strong>68%</strong>
-
-              <div className="allocation-bar">
-                <div style={{ width: '68%' }}></div>
-              </div>
-
-            </div>
-
-
-            <div className="allocation-row">
-
-              <span>Debt</span>
-
-              <strong>24%</strong>
-
-              <div className="allocation-bar">
-                <div style={{ width: '24%' }}></div>
-              </div>
-
-            </div>
-
-
-            <div className="allocation-row">
-
-              <span>Gold</span>
-
-              <strong>8%</strong>
-
-              <div className="allocation-bar">
-                <div style={{ width: '8%' }}></div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        {/* GOALS */}
-
-        <section className="dashboard-card">
-
-          <div className="card-heading">
-
-            <div>
-
-              <p className="eyebrow">
-                GOAL TRACKER
-              </p>
-
-              <h2>
-                Your Goals
-              </h2>
-
-            </div>
-
-            <a href="/goals">
-              View all →
-            </a>
-
-          </div>
-
-
-          <div className="goal-row">
-
-            <div className="goal-icon">
-              🏠
-            </div>
-
-            <div className="goal-info">
-
-              <strong>
-                House
-              </strong>
-
-              <span>
-                ₹30L target · 6 years
-              </span>
-
-            </div>
-
-            <strong className="goal-percent">
-              68%
-            </strong>
-
-          </div>
-
-
-          <div className="goal-progress">
-
-            <div style={{ width: '68%' }}></div>
-
-          </div>
-
-
-          <div className="goal-row">
-
-            <div className="goal-icon">
-              🎓
-            </div>
-
-            <div className="goal-info">
-
-              <strong>
-                Education
-              </strong>
-
-              <span>
-                ₹20L target · 8 years
-              </span>
-
-            </div>
-
-            <strong className="goal-percent">
-              84%
-            </strong>
-
-          </div>
-
-
-          <div className="goal-progress">
-
-            <div style={{ width: '84%' }}></div>
-
-          </div>
-
-        </section>
-
-
+            <div className="card-action">{item.action}</div>
+          </Link>
+        ))}
       </div>
 
-
-      {/* X-RAY WARNING */}
-
-      <section className="insight-card">
-
-        <div className="insight-icon">
-          ⚠
-        </div>
-
-        <div>
-
-          <p className="eyebrow">
-            PORTFOLIO X-RAY
-          </p>
-
-          <h3>
-            Your diversification may be misleading.
-          </h3>
-
-          <p>
-            We detected <strong>87% underlying overlap</strong>
-            across 4 large-cap funds. You may own different
-            funds but many of the same companies underneath.
-          </p>
-
-        </div>
-
-        <button>
-          Investigate →
-        </button>
-
-      </section>
-
-
-      {/* WealthPath INSIGHT */}
-
-      <section className="doctor-insight">
-
-        <div className="doctor-icon">
-          ✦
-        </div>
-
-        <div>
-
-          <p className="eyebrow">
-            WealthPAth INSIGHT
-          </p>
-
-          <h3>
-            Your portfolio is more concentrated than it appears.
-          </h3>
-
-          <p>
-            Multiple funds are giving you exposure to similar
-            large-cap companies. Consider checking the underlying
-            holdings before adding another fund.
-          </p>
-
-        </div>
-
-      </section>
-
+      <Link to="/options" className="footer-btn">
+        ← Back to Main Navigation
+      </Link>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+// Layout Container Styles
+const styles = {
+  body: {
+    backgroundColor: "#EDEBE6",
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+    color: "#403B33",
+    margin: 0,
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "40px 24px",
+  },
+};
+
+// CSS Stylesheet
+const customStyles = `
+  * { 
+    box-sizing: border-box; 
+    transition: all 0.2s ease-in-out; 
+  }
+
+  .header {
+    text-align: center;
+    max-width: 640px;
+    margin-bottom: 40px;
+  }
+
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 800;
+    color: #403B33;
+    margin-bottom: 12px;
+  }
+
+  .brand-logo span { 
+    background-color: #D6E1C7; 
+    padding: 6px 12px; 
+    border-radius: 10px; 
+    font-size: 20px; 
+  }
+
+  .header h1 { 
+    font-size: 32px; 
+    font-weight: 800; 
+    margin: 8px 0; 
+    letter-spacing: -0.5px; 
+  }
+
+  .header p { 
+    color: #666; 
+    font-size: 15px; 
+    line-height: 1.5; 
+    margin: 0; 
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 340px));
+    gap: 24px;
+    width: 100%;
+    max-width: 720px;
+  }
+
+  .option-card {
+    background: #FFFFFF;
+    border: 2px solid #D6E1C7;
+    border-radius: 18px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 25px -5px rgba(64, 59, 51, 0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .option-card:hover {
+    transform: translateY(-4px);
+    border-color: #94C7B6;
+    box-shadow: 0 16px 32px -6px rgba(64, 59, 51, 0.1);
+  }
+
+  .icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background-color: #EDEBE6;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0 0 8px 0;
+    color: #403B33;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+  }
+
+  .card-action {
+    font-size: 13px;
+    font-weight: 700;
+    color: #D3643B;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card-action::after {
+    content: '→';
+    transition: transform 0.2s ease;
+  }
+
+  .option-card:hover .card-action::after {
+    transform: translateX(4px);
+  }
+
+  .footer-btn {
+    margin-top: 36px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    color: #666;
+    padding: 8px 16px;
+    border-radius: 8px;
+  }
+
+  .footer-btn:hover { 
+    background-color: rgba(64, 59, 51, 0.05); 
+    color: #403B33; 
+  }
+
+  @media (max-width: 680px) {
+    .options-grid { 
+      grid-template-columns: 1fr; 
+    }
+  }
+`;
