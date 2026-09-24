@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import Login from "./pages/Login";
-import Classification from "./pages/Classification";
+import Login from "./pages/login";
+import Classification from "./pages/classification";
 import Dashboard from "./pages/Dashboard";
 
 function App() {
